@@ -1,0 +1,63 @@
+<robot name="openarm">
+  <!-- 基础连杆定义 -->
+  <link name="openarm_body_link0">...</link>
+
+<!-- 在joint定义前添加link定义 -->
+<link name="camera_bottom_screw_frame">
+  <!-- 可根据实际需求补充几何、惯性等参数，示例： -->
+  <visual>
+    <geometry>
+      <box size="0.1 0.1 0.1"/>
+    </geometry>
+  </visual>
+</link>
+
+  <!-- 相机相关关节/连杆（你当前的内容） -->
+  <joint name="camera_joint" type="fixed">
+    <origin rpy="0 0.5235988 0" xyz="-0.35 0 1.2"/>
+    <parent link="openarm_body_link0"/>
+    <child link="camera_bottom_screw_frame"/>
+  </joint>
+  <!-- 其他关节/连杆 -->
+
+ <!-- 左臂连杆1 -->
+<link name="left_link1">
+  <visual>
+    <geometry>
+      <cylinder length="0.2" radius="0.05"/>
+    </geometry>
+    <material name="gray"/>
+  </visual>
+</link>
+
+<!-- 左臂关节1（连接基础连杆与left_link1） -->
+<joint name="left_joint1" type="revolute">
+  <origin rpy="0 0 0" xyz="0.1 0.2 0.5"/> <!-- 关节位置，需根据实际机器人调整 -->
+  <parent link="openarm_body_link0"/>
+  <child link="left_link1"/>
+  <axis xyz="0 0 1"/> <!-- 旋转轴，需根据实际机器人调整 -->
+  <limit effort="100" lower="-1.57" upper="1.57" velocity="1.0"/> <!-- 关节限位 -->
+</joint>
+
+<!-- 左臂连杆2 -->
+<link name="left_link2">
+  <visual>
+    <geometry>
+      <cylinder length="0.2" radius="0.05"/>
+    </geometry>
+    <material name="gray"/>
+  </visual>
+</link>
+
+<!-- 左臂关节2（连接left_link1与left_link2） -->
+<joint name="left_joint2" type="revolute">
+  <origin rpy="0 0 0" xyz="0 0 0.2"/> <!-- 关节位置，需根据实际机器人调整 -->
+  <parent link="left_link1"/>
+  <child link="left_link2"/>
+  <axis xyz="0 1 0"/> <!-- 旋转轴，需根据实际机器人调整 -->
+  <limit effort="100" lower="-1.57" upper="1.57" velocity="1.0"/> <!-- 关节限位 -->
+</joint>
+
+<!-- 同理补充左臂其他关节/连杆（如left_joint3、left_link3等） -->
+
+</robot>

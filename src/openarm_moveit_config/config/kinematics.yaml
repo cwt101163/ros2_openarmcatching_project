@@ -1,0 +1,16 @@
+left_arm:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 5.0  # 从0.005改为5秒，给足规划时间
+  kinematics_solver_attempts: 10  # 新增：增加规划尝试次数
+  kinematics_solver_position_only_ik: true  # 新增
+  joints: [openarm_left_joint1, openarm_left_joint2, openarm_left_joint3, openarm_left_joint4, openarm_left_joint5, openarm_left_joint6, openarm_left_joint7]  # 新增：指定左臂关节列表
+
+  
+right_arm:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 5.0
+  kinematics_solver_attempts: 10
+  joints: [openarm_right_joint1, openarm_right_joint2, openarm_right_joint3, openarm_right_joint4, openarm_right_joint5, openarm_right_joint6, openarm_right_joint7]  # 新增：指定右臂关节列表
+

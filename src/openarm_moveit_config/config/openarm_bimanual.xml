@@ -1,0 +1,165 @@
+<mujoco model="openarm_bimanual">
+
+  <compiler angle="radian" eulerseq="XYZ"/>
+  <option gravity="0 0 -9.81" timestep="0.002"/>
+
+<!-- 棋盘格 -->
+<asset>
+  <texture name="checker_tex" file="checkerboard_4x4.png" type="2d"/>
+  <material name="checker_mat" texture="checker_tex" texrepeat="5 5" texuniform="true"/>
+
+ <!-- 香蕉 -->
+  <mesh name="banana_mesh" file="models/textured_simple.obj" scale="1 1 1"/>
+</asset>
+  <worldbody>
+    <!-- 固定基座 -->
+    <body name="base" pos="0 0 0">
+      <geom type="box" size="0.12 0.12 0.12" rgba="0.3 0.3 0.3 1" contype="0" conaffinity="0"/>
+
+      <!-- ============ 左臂 ============ -->
+      <body name="left_link0" pos="0 0.031 0.698" euler="-1.5708 0 0">
+        <inertial mass="0.8" diaginertia="0.005 0.005 0.005" pos="0 0 0"/>
+        <geom type="cylinder" size="0.04 0.06" rgba="0.9 0.3 0.3 1" contype="0" conaffinity="0"/>
+        <joint name="left_joint1" type="hinge" axis="0 0 1" range="-3.4907 1.3963" damping="1.0" armature="0.01"/>
+
+        <body name="left_link1" pos="0 0 0.12">
+          <inertial mass="0.7" diaginertia="0.004 0.004 0.004" pos="0 0 0"/>
+          <geom type="capsule" size="0.03 0.12" rgba="0.9 0.3 0.3 1" contype="0" conaffinity="0"/>
+          <joint name="left_joint2" type="hinge" axis="0 1 0" range="-1.5708 1.5708" damping="1.0" armature="0.01"/>
+
+          <body name="left_link2" pos="0 0 0.22">
+            <inertial mass="0.6" diaginertia="0.004 0.004 0.004" pos="0 0 0"/>
+            <geom type="capsule" size="0.03 0.12" rgba="0.9 0.3 0.3 1" contype="0" conaffinity="0"/>
+            <joint name="left_joint3" type="hinge" axis="0 1 0" range="-3.1416 0" damping="1.0" armature="0.01"/>
+
+            <body name="left_link3" pos="0 0 0.18">
+              <inertial mass="0.5" diaginertia="0.003 0.003 0.003" pos="0 0 0"/>
+              <geom type="capsule" size="0.025 0.10" rgba="0.9 0.3 0.3 1" contype="0" conaffinity="0"/>
+              <joint name="left_joint4" type="hinge" axis="0 1 0" range="-3.1416 3.1416" damping="1.0" armature="0.01"/>
+
+              <body name="left_link4" pos="0 0 0.16">
+                <inertial mass="0.4" diaginertia="0.0025 0.0025 0.0025" pos="0 0 0"/>
+                <geom type="capsule" size="0.025 0.09" rgba="0.9 0.3 0.3 1" contype="0" conaffinity="0"/>
+                <joint name="left_joint5" type="hinge" axis="0 0 1" range="-3.1416 3.1416" damping="1.0" armature="0.01"/>
+
+                <body name="left_link5" pos="0 0 0.14">
+                  <inertial mass="0.3" diaginertia="0.002 0.002 0.002" pos="0 0 0"/>
+                  <geom type="capsule" size="0.025 0.08" rgba="0.9 0.3 0.3 1" contype="0" conaffinity="0"/>
+                  <joint name="left_joint6" type="hinge" axis="0 1 0" range="-3.1416 3.1416" damping="1.0" armature="0.01"/>
+
+                  <body name="left_link6" pos="0 0 0.13">
+                    <inertial mass="0.25" diaginertia="0.0015 0.0015 0.0015" pos="0 0 0"/>
+                    <geom type="capsule" size="0.02 0.07" rgba="0.9 0.3 0.3 1" contype="0" conaffinity="0"/>
+                    <joint name="left_joint7" type="hinge" axis="0 0 1" range="-3.1416 3.1416" damping="1.0" armature="0.01"/>
+
+                    <!-- 左末端 -->
+                    <body name="left_ee" pos="0 0 0.07">
+                      <geom type="sphere" size="0.025" rgba="0.2 0.9 0.2 1" contype="0" conaffinity="0"/>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- ============ 右臂（y 坐标取负，镜像）============ -->
+      <body name="right_link0" pos="0 -0.031 0.698" euler="-1.5708 0 0">
+        <inertial mass="0.8" diaginertia="0.005 0.005 0.005" pos="0 0 0"/>
+        <geom type="cylinder" size="0.04 0.06" rgba="0.3 0.3 0.9 1" contype="0" conaffinity="0"/>
+        <joint name="right_joint1" type="hinge" axis="0 0 1" range="-3.4907 1.3963" damping="1.0" armature="0.01"/>
+
+        <body name="right_link1" pos="0 0 0.12">
+          <inertial mass="0.7" diaginertia="0.004 0.004 0.004" pos="0 0 0"/>
+          <geom type="capsule" size="0.03 0.12" rgba="0.3 0.3 0.9 1" contype="0" conaffinity="0"/>
+          <joint name="right_joint2" type="hinge" axis="0 1 0" range="-1.5708 1.5708" damping="1.0" armature="0.01"/>
+
+          <body name="right_link2" pos="0 0 0.22">
+            <inertial mass="0.6" diaginertia="0.004 0.004 0.004" pos="0 0 0"/>
+            <geom type="capsule" size="0.03 0.12" rgba="0.3 0.3 0.9 1" contype="0" conaffinity="0"/>
+            <joint name="right_joint3" type="hinge" axis="0 1 0" range="-3.1416 0" damping="1.0" armature="0.01"/>
+
+            <body name="right_link3" pos="0 0 0.18">
+              <inertial mass="0.5" diaginertia="0.003 0.003 0.003" pos="0 0 0"/>
+              <geom type="capsule" size="0.025 0.10" rgba="0.3 0.3 0.9 1" contype="0" conaffinity="0"/>
+              <joint name="right_joint4" type="hinge" axis="0 1 0" range="-3.1416 3.1416" damping="1.0" armature="0.01"/>
+
+              <body name="right_link4" pos="0 0 0.16">
+                <inertial mass="0.4" diaginertia="0.0025 0.0025 0.0025" pos="0 0 0"/>
+                <geom type="capsule" size="0.025 0.09" rgba="0.3 0.3 0.9 1" contype="0" conaffinity="0"/>
+                <joint name="right_joint5" type="hinge" axis="0 0 1" range="-3.1416 3.1416" damping="1.0" armature="0.01"/>
+
+                <body name="right_link5" pos="0 0 0.14">
+                  <inertial mass="0.3" diaginertia="0.002 0.002 0.002" pos="0 0 0"/>
+                  <geom type="capsule" size="0.025 0.08" rgba="0.3 0.3 0.9 1" contype="0" conaffinity="0"/>
+                  <joint name="right_joint6" type="hinge" axis="0 1 0" range="-3.1416 3.1416" damping="1.0" armature="0.01"/>
+
+                  <body name="right_link6" pos="0 0 0.13">
+                    <inertial mass="0.25" diaginertia="0.0015 0.0015 0.0015" pos="0 0 0"/>
+                    <geom type="capsule" size="0.02 0.07" rgba="0.3 0.3 0.9 1" contype="0" conaffinity="0"/>
+                    <joint name="right_joint7" type="hinge" axis="0 0 1" range="-3.1416 3.1416" damping="1.0" armature="0.01"/>
+
+                    <!-- 右末端 -->
+                    <body name="right_ee" pos="0 0 0.07">
+                      <geom type="sphere" size="0.025" rgba="0.2 0.9 0.2 1" contype="0" conaffinity="0"/>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- ============ RealSense D435 相机支架 ============ -->
+<body name="realsense_base" pos="0.35 0 1.2">
+  <geom type="box" size="0.012 0.04 0.012" rgba="0.1 0.1 0.1 1" contype="0" conaffinity="0"/>
+  <site name="camera_center" pos="0 0 0" size="0.02" rgba="1 0 0 1"/>
+  <site name="target" pos="0 0 0" size="0.02" rgba="0 1 0 1"/>
+  <camera name="d435_front" pos="0 0 0" euler="0 0 0" fovy="60"/>
+
+</body>
+
+      <!-- ============ 桌子 ============ -->
+      <body name="table" pos="0.35 0 0.0">
+        <geom type="box" size="0.25 0.3 0.15" pos="0 0 0.15" rgba="0.7 0.5 0.3 1" contype="1" conaffinity="1"/>
+      </body>
+
+<!-- 标定板 -->
+<body name="calibration_board" pos="0.35 0 0.31">
+  <inertial mass="0.1" diaginertia="0.001 0.001 0.001" pos="0 0 0"/>
+  <geom type="plane" size="0.2 0.2 0.001" material="checker_mat" contype="0" conaffinity="0"/>
+</body>
+
+ <body name="banana" pos="0.35 0.0 0.31">
+  <inertial mass="0.12" diaginertia="0.0001 0.0001 0.0001" pos="0 0 0"/>
+  <geom type="mesh" mesh="banana_mesh" rgba="1.0 0.9 0.2 1" contype="1" conaffinity="1"/>
+  <geom type="capsule" size="0.025 0.15" rgba="0 0 0 0" contype="1" conaffinity="1"/>
+</body>
+
+    </body>
+  </worldbody>
+
+  <!-- 执行器：为每个关节添加电机 -->
+  <actuator>
+    <!-- Left arm -->
+    <motor name="m_left1" joint="left_joint1" ctrlrange="-50 50" gear="1"/>
+    <motor name="m_left2" joint="left_joint2" ctrlrange="-50 50" gear="1"/>
+    <motor name="m_left3" joint="left_joint3" ctrlrange="-50 50" gear="1"/>
+    <motor name="m_left4" joint="left_joint4" ctrlrange="-30 30" gear="1"/>
+    <motor name="m_left5" joint="left_joint5" ctrlrange="-30 30" gear="1"/>
+    <motor name="m_left6" joint="left_joint6" ctrlrange="-20 20" gear="1"/>
+    <motor name="m_left7" joint="left_joint7" ctrlrange="-20 20" gear="1"/>
+
+    <!-- Right arm -->
+    <motor name="m_right1" joint="right_joint1" ctrlrange="-50 50" gear="1"/>
+    <motor name="m_right2" joint="right_joint2" ctrlrange="-50 50" gear="1"/>
+    <motor name="m_right3" joint="right_joint3" ctrlrange="-50 50" gear="1"/>
+    <motor name="m_right4" joint="right_joint4" ctrlrange="-30 30" gear="1"/>
+    <motor name="m_right5" joint="right_joint5" ctrlrange="-30 30" gear="1"/>
+    <motor name="m_right6" joint="right_joint6" ctrlrange="-20 20" gear="1"/>
+    <motor name="m_right7" joint="right_joint7" ctrlrange="-20 20" gear="1"/>
+  </actuator>
+
+</mujoco>
